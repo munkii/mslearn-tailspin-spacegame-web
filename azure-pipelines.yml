@@ -42,14 +42,13 @@ steps:
     arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run unit tests - $(buildConfiguration)'
+- task: VSTest@2
+  displayName: "Run tests (VSTest)"
   inputs:
-    command: 'test'
-    arguments: '--no-build --configuration $(buildConfiguration) --collect "Code coverage"'
-    publishTestResults: true
-    projects: '**/*.Tests.csproj'
-
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: **\*test*.dll
+    codeCoverageEnabled: true
+    
 - task: DotNetCoreCLI@2
   displayName: 'Publish the project - $(buildConfiguration)'
   inputs:
