@@ -46,7 +46,7 @@ steps:
   displayName: 'Run tests (VSTest)'
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: **\*test*.dll
+    testAssemblyVer2: '**\*test*.dll'
     codeCoverageEnabled: true
     
 - task: DotNetCoreCLI@2
