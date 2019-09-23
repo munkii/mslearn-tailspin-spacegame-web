@@ -1,3 +1,4 @@
+[![Build Status](https://munkiisoft.visualstudio.com/AzureDevOps_Learn/_apis/build/status/Build?branchName=master)](https://munkiisoft.visualstudio.com/AzureDevOps_Learn/_build/latest?definitionId=13&branchName=master)
 
 # Contributing
 
