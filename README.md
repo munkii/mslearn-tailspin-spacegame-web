@@ -1,5 +1,7 @@
 [![Build Status](https://munkiisoft.visualstudio.com/AzureDevOps_Learn/_apis/build/status/Build?branchName=master)](https://munkiisoft.visualstudio.com/AzureDevOps_Learn/_build/latest?definitionId=13&branchName=master)
 
+[![Quality Gate Status](https://sonarqube-azure-munkiisoft.azurewebsites.net/api/project_badges/measure?project=ado%3Alearn&metric=alert_status)](https://sonarqube-azure-munkiisoft.azurewebsites.net/dashboard?id=ado%3Alearn)
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
