@@ -81,18 +81,33 @@ steps:
 
     - task: SonarQubeAnalyze@4
       displayName: 'Run SQ Code Analysis (master only)'
-      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+      condition: |
+        and
+        (
+            succeeded(), 
+            eq(variables['Build.SourceBranch'], 'refs/heads/master')
+        )
 
     - task: SonarQubePublish@4
       displayName: 'Publish SQ Code Analysis (master only)'
       inputs:
          pollingTimeoutSec: '300'
-      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+      condition: |
+            and
+            (
+                succeeded(), 
+                eq(variables['Build.SourceBranch'], 'refs/heads/master')
+            )
 
     - task: WhiteSource Bolt@19
       displayName: 'Run WhiteSource Bolt'
       condition: |
-          and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+          and
+          (
+            succeeded(), 
+            eq(variables['Build.Reason'], 'PullRequest'),
+            eq(variables['System.PullRequest.TargetBranch'], 'master')
+          )
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
