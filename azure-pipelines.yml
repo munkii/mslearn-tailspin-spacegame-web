@@ -2,7 +2,7 @@ pool:
     vmImage: 'vs2017-win2016'
     demands:
         npm
-
+        
 variables:
     buildConfiguration: 'Release'
     wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
@@ -13,7 +13,19 @@ steps:
       displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
       inputs:
         version: $(dotnetSdkVersion)
-    
+        
+    - task: SonarQubePrepare@4
+      displayName: 'Prepare SonarQube (master only)'
+      inputs:
+          SonarQube: 'SonarCube_In_Azure'
+          scannerMode: 'MSBuild'
+          projectKey: '$(projectKey)'
+          projectVersion: '$(Build.BuildNumber)'
+          extraProperties: |
+               sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml
+               sonar.exclusions=**/wwwroot/lib/**/*
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
     - task: Npm@1
       displayName: 'Run npm install'
       inputs:
@@ -42,6 +54,16 @@ steps:
     - template: templates/build.yml
       parameters:
         buildConfiguration: 'Release'
+
+    - task: SonarQubeAnalyze@4
+      displayName: 'Run SQ Code Analysis (master only)'
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+    - task: SonarQubePublish@4
+      displayName: 'Publish SQ Code Analysis (master only)'
+      inputs:
+         pollingTimeoutSec: '300'
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
