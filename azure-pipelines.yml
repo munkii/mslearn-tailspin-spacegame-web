@@ -89,6 +89,7 @@ steps:
         )
 
     - task: sonar-buildbreaker@8
+      displayName: 'Break Build if SQ QG fail'
       inputs:
         SonarQube: 'SonarCube_In_Azure'
         
