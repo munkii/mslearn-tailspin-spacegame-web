@@ -1,0 +1,12 @@
+{
+  "ServerUri": "https://sonarqube-azure-munkiisoft.azurewebsites.net",
+  "Organization": null,
+  "ProjectKey": "ado:learn",
+  "ProjectName": "AzureDevOps_Learn",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AW1dM8ZAXwBZXvkshiQO",
+      "ProfileTimestamp": "2019-09-23T09:18:57+01:00"
+    }
+  }
+}
