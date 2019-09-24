@@ -88,6 +88,10 @@ steps:
             eq(variables['Build.SourceBranch'], 'refs/heads/master')
         )
 
+    - task: sonar-buildbreaker@8
+      inputs:
+        SonarQube: 'SonarCube_In_Azure'
+        
     - task: SonarQubePublish@4
       displayName: 'Publish SQ Code Analysis (master only)'
       inputs:
