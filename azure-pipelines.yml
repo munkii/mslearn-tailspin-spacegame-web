@@ -14,18 +14,18 @@ steps:
       inputs:
         version: $(dotnetSdkVersion)
         
-    - task: SonarQubePrepare@4
-      displayName: 'Prepare SonarQube (master only)'
-      inputs:
-          SonarQube: 'SonarCube_In_Azure'
-          scannerMode: 'MSBuild'
-          projectKey: '$(projectKey)'
-          projectVersion: '$(Build.BuildNumber)'
-          extraProperties: |
-               sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml
-               sonar.exclusions=**/wwwroot/lib/**/*
-      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-
+    #- task: SonarQubePrepare@4
+    #  displayName: 'Prepare SonarQube (master only)'
+    #  inputs:
+    #      SonarQube: 'SonarCube_In_Azure'
+    #      scannerMode: 'MSBuild'
+    #      projectKey: '$(projectKey)'
+    #      projectVersion: '$(Build.BuildNumber)'
+    #      extraProperties: |
+    #           sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml
+    #           sonar.exclusions=**/wwwroot/lib/**/*
+    #  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    
     - task: Npm@1
       displayName: 'Run npm install'
       inputs:
